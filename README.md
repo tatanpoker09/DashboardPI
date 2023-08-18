@@ -1,1 +1,2 @@
-Check out http://smashing.github.io/smashing for more information.
+# DashboardPI
+Raspberry Pi Dashboard for system monitoring using Smashing
