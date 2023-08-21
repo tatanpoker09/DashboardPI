@@ -5,7 +5,8 @@ class Dashing.WorldClock extends Dashing.Widget
     { zone: "Europe/Amsterdam", display_location: "NL" },
     { zone: "Europe/Berlin", display_location: "DE" },
     { zone: "America/Santiago", display_location: "CL" },
-    { zone: "Europe/London", display_location: "UK" }
+    { zone: "Europe/London", display_location: "UK" },
+    { zone: "Asia/Taipei", display_location: "TW"}
   ]
 
   startClock: ->
