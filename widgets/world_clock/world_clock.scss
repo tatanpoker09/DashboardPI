@@ -1,7 +1,7 @@
 .widget.widget-world-clock {
   $dark-text: #333;
   $dark-background: grey;
-  font-size: 2em;
+  font-size: 1.8em;
   padding-top: 55px;
 
   > ul li {
@@ -57,7 +57,6 @@
       color: $dark-background;
 
       .location {
-        margin-left: -50%;
         &.local {
           color: white;
         }
