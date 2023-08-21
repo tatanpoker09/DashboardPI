@@ -7,6 +7,7 @@ configure do
   # how to add additional template languages.
   set :template_languages, %i[html erb]
   set :show_exceptions, false
+  set :default_dashboard, 'silicon_dashboard'
 
   helpers do
     def protected!

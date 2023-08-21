@@ -31,5 +31,3 @@ WORKDIR /app/my-project
 # Expose the port that Smashing uses
 EXPOSE 3030
 
-# Start the Smashing dashboard
-CMD ["smashing", "start"]
