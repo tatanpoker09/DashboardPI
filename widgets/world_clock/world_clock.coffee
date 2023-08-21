@@ -3,7 +3,7 @@ class Dashing.WorldClock extends Dashing.Widget
   locations: [
     { zone: "America/Los_Angeles", display_location: "SF", primary: true },
     { zone: "Europe/Amsterdam", display_location: "NL" },
-    { zone: "Europe/Frankfurt", display_location: "DE" },
+    { zone: "Europe/Berlin", display_location: "DE" },
     { zone: "America/Santiago", display_location: "CL" },
     { zone: "Europe/London", display_location: "UK" }
   ]
