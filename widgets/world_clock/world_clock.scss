@@ -49,12 +49,14 @@
     .placeholder {
       height: 30px;
       width: 2px;
+      left: 0; /* Add this line to align minute text to the left */
       background: $dark-background;
     }
 
     .label {
       position: relative;
       color: $dark-background;
+
 
       .location {
         &.local {

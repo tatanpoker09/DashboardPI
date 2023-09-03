@@ -1,57 +1,46 @@
-# =begin
-# # encoding: UTF-8
-#
-# #require 'google/api_client'
-# require 'date'
-# require 'time'
-# require 'digest/md5'
-# #require 'active_support'
-# #require 'active_support/all'
-# require 'json'
-#
-# # Update these to match your own apps credentials
-# service_account_email = '...@developer.gserviceaccount.com' # Email of service account
-# key_file = '/Path/to/keyfile.p12' # File containing your private key
-# key_secret = 'notasecret' # Password to unlock private key
-# calendarID = '...@group.calendar.google.com' # Calendar ID.
-#
-# # Get the Google API client
-# client = Google::APIClient.new(:application_name => 'Dashing Calendar Widget',
-#                                :application_version => '0.0.1')
-#
-# # Load your credentials for the service account
-# if not key_file.nil? and File.exists? key_file
-#   key = Google::APIClient::KeyUtils.load_from_pkcs12(key_file, key_secret)
-# else
-#   key = OpenSSL::PKey::RSA.new ENV['GOOGLE_SERVICE_PK'], key_secret
-# end
-#
-# client.authorization = Signet::OAuth2::Client.new(
-#   :token_credential_uri => 'https://accounts.google.com/o/oauth2/token',
-#   :audience => 'https://accounts.google.com/o/oauth2/token',
-#   :scope => 'https://www.googleapis.com/auth/calendar.readonly',
-#   :issuer => service_account_email,
-#   :signing_key => key)
-#
-# # Start the scheduler
-# SCHEDULER.every '15m', :first_in => 4 do |job|
-#
-#   # Request a token for our service account
-#   client.authorization.fetch_access_token!
-#
-#   # Get the calendar API
-#   service = client.discovered_api('calendar','v3')
-#
-#   # Start and end dates
-#   now = DateTime.now
-#
-#   result = client.execute(:api_method => service.events.list,
-#                           :parameters => {'calendarId' => calendarID,
-#                                           'timeMin' => now.rfc3339,
-#                                           'orderBy' => 'startTime',
-#                                           'singleEvents' => 'true',
-#                                           'maxResults' => 6})  # How many calendar items to get
-#
-#   send_event('google_calendar', { events: result.data })
-#
-# end=end
+# encoding: UTF-8
+
+require 'google/apis/calendar_v3'
+require 'googleauth'
+require 'googleauth/stores/file_token_store'
+require 'fileutils'
+require 'json'
+
+# Constants
+CALENDAR_ID = 'ceilersg@andrew.cmu.edu' # Replace with your Calendar ID
+CREDENTIALS_PATH = './creds/treeassistant-tatan-54ea00e027d5.json'
+TOKEN_PATH = './creds/token.yaml'
+SCOPE = Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY
+
+# Ensure client secrets file exists at CREDENTIALS_PATH
+unless File.exist?(CREDENTIALS_PATH)
+  puts "Missing client secrets file at #{CREDENTIALS_PATH}"
+  exit 1
+end
+
+# Initialize the Google Calendar API
+service = Google::Apis::CalendarV3::CalendarService.new
+service.client_options.application_name = 'Dashing Calendar Widget'
+service.authorization = Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: File.open(CREDENTIALS_PATH),
+  scope: SCOPE
+)
+
+# Load token or authorize if necessary
+service.authorization.fetch_access_token!
+
+# Start the scheduler
+SCHEDULER.every '15m', first_in: 4 do |job|
+  time_min = (Time.now - 15 * 60).iso8601 # 15 minutes ago
+
+  # Fetch events from the calendar
+  events = service.list_events(
+    CALENDAR_ID,
+    max_results: 6,
+    single_events: true,
+    order_by: 'startTime',
+    time_min: time_min,
+  )
+
+  send_event('google_calendar', {events: events})
+end

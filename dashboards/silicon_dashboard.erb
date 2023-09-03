@@ -1,6 +1,6 @@
 <script type='text/javascript'>
     $(function() {
-        Dashing.gridsterLayout('[{"col":1,"row":2,"size_x":1,"size_y":1},{"col":2,"row":2,"size_x":1,"size_y":1},{"col":4,"row":2,"size_x":1,"size_y":1},{"col":6,"row":1,"size_x":1,"size_y":1},{"col":3,"row":2,"size_x":1,"size_y":1},{"col":1,"row":1,"size_x":4,"size_y":1}]')
+        Dashing.gridsterLayout('[{"col":1,"row":2,"size_x":1,"size_y":1},{"col":3,"row":2,"size_x":1,"size_y":1},{"col":2,"row":2,"size_x":1,"size_y":1},{"col":1,"row":1,"size_x":4,"size_y":1}]')
     });
 </script>
 <% content_for :title do %>Silicon Dashboard<% end %>
@@ -19,18 +19,8 @@
       <div data-id="google_calendar" data-view="GoogleCalendar"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="freeday_countdown_lt" data-view="FreedayCountdown" data-sound="/assets/sounds/Rudimental-Home.mp3"></div>
-      <i class="icon-time icon-background"></i>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="freeday_countdown_gb" data-view="FreedayCountdown" data-sound="nosound" data-time-offset="2"></div>
-      <i class="icon-time icon-background"></i>
-    </li>
-
     <li data-row="1" data-col="1" data-sizex="4" data-sizey="1">
       <div data-view="WorldClock" class="widget widget-world-clock"></div>
     </li>
   </ul>
-  <center><div style="font-size: 12px">Try this: curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "text": "Hey, Look at me!" }' \http://<%=request.host%>:<%=request.port%>/widgets/welcome</div></center>
 </div>
