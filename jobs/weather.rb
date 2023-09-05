@@ -7,7 +7,7 @@ CITY_ID = 5375480
 UNITS   = 'metric'
 
 # create free account on open weather map to get API key
-API_KEY = "333554ff0ccf1da5ae5bf0e0b108341a"#ENV['WEATHER_KEY']
+API_KEY = ENV['WEATHER_KEY']
 
 SCHEDULER.every '20s', :first_in => 0 do |job|
   http = Net::HTTP.new('api.openweathermap.org')
