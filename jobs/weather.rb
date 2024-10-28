@@ -1,7 +1,7 @@
 require 'net/http'
 
 # you can find CITY_ID here http://bulk.openweathermap.org/sample/city.list.json.gz
-CITY_ID = 5375480
+CITY_ID = 5393015
 
 # options: metric / imperial
 UNITS   = 'metric'
