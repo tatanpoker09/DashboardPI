@@ -1,0 +1,42 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color:  #303030;
+
+$title-color: rgba(255, 255, 255, 0.7);
+$full-color:  rgba(255, 255, 255, 1);
+$light-color: rgba(255, 255, 255, 0.7);
+
+// ----------------------------------------------------------------------------
+// Widget-forecast styles
+// ----------------------------------------------------------------------------
+.widget-housetemperature {
+
+  background-color: $background-color;
+
+  .title {
+    color: $title-color;
+    font-size: 28px;
+    top: 20px;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  .temperature {
+    color: $full-color;
+  }
+
+  .humidity {
+    color: $full-color;
+    font-size: 45px;
+  }
+
+  .more-info {
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+  .updated-at {
+    color: $light-color;
+  }
+}
